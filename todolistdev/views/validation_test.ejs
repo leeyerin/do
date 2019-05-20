@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<%
+var title = result[0];
+var contents = result[1];
+var deadlinke = result[2];
+%>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>TO-DO-LIST EDIT</title>
+        <base href="/views/">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="css/animate.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+        <!--   <div id="wrapper">
+    
+     <div id="page-wrapper" class="gray-bg"> 
+        <div class="wrapper wrapper-content  animated fadeInRight">
+            <div class="row"> 
+                <div class="col-lg-6"> 
+                    <div class="ibox ">-->
+        <div class="ibox-title">
+            <h5>To-DO-LIST</h5>
+        </div>
+        <div class="ibox-content">
+            <h2>
+                To-do-List 수정하기
+            </h2>
+            <%
+            var title = result[0];
+            %>
+            <form role="form" method="post" action="../edit_complete?title=<%=title %>">
+                <div class="form-group">
+                    <label>제목</label>
+                    <input type="text" name="title" class="form-control" value="<%= result[0] %>">
+                </div>
+                <div class="form-group">
+                    <label>내용</label>
+                    <textarea name="contents" class="form-control" name="contents" cols="80"><%= result[1] %></textarea>
+                </div>
+                <div class="form-group">
+                    <label>마감기한 [일-월-년]</label>
+                    <div class="input-group date">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        <input id="deadline" name="deadline" type="text" class="form-control" value="<%= result[2] %>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>완료상태</label>
+                    <!--
+                    <input type="text" name="status" class="form-control" value="<%= result[3] %>"> -->
+                    <div class="radio">
+
+                        <%
+                                                        if(result[3]=='Y') {
+                                                        %>
+                            <label>
+                                <input type="radio" name="optionsRadios" id="complete" name="status" value="Y" checked> 완료
+                            </label>
+                            <label>
+                                <input type="radio" name="optionsRadios" id="non-complete" name="status" value="N"> 미완료
+                            </label>
+                            <%
+                                                }
+                                                else {
+                                                %>
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="complete" name="status" value="Y"> 완료
+                                </label>
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="non-complete" name="status" value="N" checked> 미완료
+                                </label>
+
+                                <%
+                            }
+                            %>
+                    </div>
+                </div>
+                <!--<input type="text" placeholder="내용을 입력해주세요" class="form-control" name="password" height :150px></div> -->
+                <div>
+                    <button class="btn btn-sm btn-primary m-t-n-xs" value="Refresh Page"  type="submit" id="submit">
+                        <strong>수정하기</strong>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!--
+                    </div>
+
+
+                </div>-->
+        <!--
+            </div>
+
+        </div>
+         </div>
+        </div>
+    -->
+
+
+        <!-- Mainly scripts -->
+        <script src="js/jquery-2.1.1.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+        <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+        <!-- Custom and plugin javascript -->
+        <script src="js/inspinia.js"></script>
+        <script src="js/plugins/pace/pace.min.js"></script>
+
+        <script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+        <!-- Jquery Validate -->
+        <script src="js/plugins/validate/jquery.validate.min.js"></script>
+
+        <script>
+                function goOpener(){
+                
+                    opener.name ="submit_reload";
+                    document.frmName.target = opener.name;
+                    document.frmName.action = "action Url";
+                    document.frmName.submit(); 
+                    self.close();
+                
+                 }
+                </script>
+                
+
+        <script>
+            $(document).ready(function () {
+
+                $('.footable').footable();
+
+                $('#date_added').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    autoclose: true
+                });
+
+                $('#date_modified').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    autoclose: true
+                });
+
+            });
+
+        </script>
+
+
+
+
+        <script>
+            $(document).ready(function () {
+
+                $("#form").validate({
+                    rules: {
+                        password: {
+                            required: true,
+                            minlength: 3
+                        },
+                        url: {
+                            required: true,
+                            url: true
+                        },
+                        number: {
+                            required: true,
+                            number: true
+                        },
+                        min: {
+                            required: true,
+                            minlength: 6
+                        },
+                        max: {
+                            required: true,
+                            maxlength: 4
+                        }
+                    }
+                });
+            });
+        </script>
+
+    </body>
+
+</html>
